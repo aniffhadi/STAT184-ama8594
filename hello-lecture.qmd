@@ -1,0 +1,48 @@
+---
+title: "Hello, Quarto - Example 1, Look I change the Title"
+author: "Aniff"
+code-fold: true
+format: html
+---
+
+## Making a pdf document
+
+We have changed the *format* field in the YAML heading to **pdf** to make the output file in pdf format. Note that you may need additional packages installed for rendering to pdf file.
+
+```{r}
+#| label: load-new-packages
+#| include: true
+#| warning: false
+
+library(tidyverse)
+data(iris)
+```
+
+## Iris data
+
+The `iris` data contains measurements of **the** variables sepal length and width and petal length and width, respectively, for `{r} nrow(iris)` flowers from each of `{r} length(levels(iris$Species))` species of iris.
+
+For more information, you may execute `help(iris).`
+
+You can insert an image by following **Insert \> Figure/Image**.
+
+![Iris sanguinea (By Alpsdake - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=19823709)](Iris_sanguinea.jpeg){width="201" height="190"}
+
+### Scatter plot
+
+```{r}
+#| label: plot-iris
+#| warning: false
+#| echo: true
+
+ggplot(iris, 
+       aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point(aes(color = Species, shape = Species)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(
+    title = "Scatter plot of Sepal Length and Width",
+    x = "Sepal Length (cm)", y = "Sepal Width (mm)",
+    color = "Iris species", shape = "Iris species"
+  ) +
+  theme_minimal()
+```
